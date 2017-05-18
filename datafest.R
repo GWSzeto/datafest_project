@@ -74,6 +74,8 @@ data_x <- data_map[with (data_map, grepl("2015-03-31", date_time))]$srch_destina
 data_y <- data_map[with (data_map, grepl("2015-03-31", date_time))]$srch_destination_latitude
 
 mapWorld <- borders("world", colour="gray50", fill="gray50") 
+mp <- ggplot() + mapWorld + geom_point(aes(x=data_x, y=data_y), color="red", size=1) + ggtitle("2015-03-31")
+
 
 # function that takes all the booking coordinates coressponding to that date and plots them
 mapping <- function(x){
@@ -94,8 +96,6 @@ for (i in 1:NROW(dates)){
   print(ggplot() + mapWorld + geom_point(aes(x=longitude, y=latitude), color="red", size=1))
   dev.off()
 }
-
-asd
 
 
 
