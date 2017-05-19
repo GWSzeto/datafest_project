@@ -91,12 +91,14 @@ for (i in 1:NROW(dates)){
   longitude <- data_map[with (data_map, grepl(dates[i], date_time))]$srch_destination_longitude
   latitude <- data_map[with (data_map, grepl(dates[i], date_time))]$srch_destination_latitude
   
-  file_name <- file.path("~", "projects", "datafest", "images", paste("map", i, ".png", sep=""))
+  file_name <- file.path("~", "projects", "data_fest", "images", paste("map", i, ".png", sep=""))
   png(filename = file_name, width=800)
-  print(ggplot() + mapWorld + geom_point(aes(x=longitude, y=latitude), color="red", size=1))
+  print(ggplot() + mapWorld + geom_point(aes(x=longitude, y=latitude), color="red", size=1) + ggtitle(dates[i]))
   dev.off()
 }
 
+setwd("~/projects/data_fest/images")
+system("convert -delay 30 $(for i in $(seq 1 365); do echo map${i}.png; done -loop 0 can_map.gif")
 
 
 
